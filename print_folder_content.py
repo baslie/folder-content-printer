@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-my_folder_path = "C:\\Users\\Roman\\Desktop\\Chrome\\ChatGPT_Clipper_Extension"
-my_output_file = "C:\\Users\\Roman\\Desktop\\output.txt"
+my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\MyFolder"
+my_output_file = "C:\\YOUR\\PATH\\output.txt"
 
 TEXT_EXTENSIONS = {".txt", ".html", ".js", ".css", ".py", ".json"}
 OTHER_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".zip", ".rar", ".tar", ".gz", ".7z"}
