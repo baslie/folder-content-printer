@@ -32,12 +32,12 @@ def print_folder_content(path: str, output_file: str):
 
         for idx, item_path, item_type in file_content:
             if item_type == "folder":
-                f.write(f"{idx}. Папка \"{os.path.basename(item_path)}\"\n\n")
+                f.write(f"{idx}. Folder \"{os.path.basename(item_path)}\"\n\n")
                 f.write("- - - - - - - - - - - - - - - - - - - -\n\n")
             else:
                 ext = Path(item_path).suffix
                 if ext in TEXT_EXTENSIONS:
-                    f.write(f"{idx}. {ext.upper()[1:]}-файл \"{os.path.basename(item_path)}\"\n\n")
+                    f.write(f"{idx}. {ext.upper()[1:]}-file \"{os.path.basename(item_path)}\"\n\n")
                     with open(item_path, "r", encoding="utf-8") as file:
                         f.write(file.read())
                 elif ext in OTHER_EXTENSIONS:
