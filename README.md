@@ -9,8 +9,8 @@ A Python script that iterates through the specified directory, prints the conten
 3. Run the script.
 
 ```python
-my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\MyFolder"
-my_output_file = "C:\\YOUR\\PATH\\output.txt"
+my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\my_folder"
+my_output_file = "C:\\YOUR\\PATH\\TO\\OUTPUT\\output.txt"
 ```
 
 ## Example
