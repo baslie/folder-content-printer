@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\MyFolder"
-my_output_file = "C:\\YOUR\\PATH\\output.txt"
+my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\my_folder"
+my_output_file = "C:\\YOUR\\PATH\\TO\\OUTPUT\\output.txt"
 
 TEXT_EXTENSIONS = {".txt", ".html", ".js", ".css", ".py", ".json"}
 OTHER_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".zip", ".rar", ".tar", ".gz", ".7z"}
