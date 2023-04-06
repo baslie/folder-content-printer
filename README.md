@@ -9,8 +9,8 @@ A Python script that iterates through the specified directory, prints the conten
 3. Run the script.
 
 ```python
-my_folder_path = "C:\\Users\\Roman\\Desktop\\Chrome\\ChatGPT_Clipper_Extension"
-my_output_file = "C:\\Users\\Roman\\Desktop\\output.txt"
+my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\MyFolder"
+my_output_file = "C:\\YOUR\\PATH\\output.txt"
 ```
 
 ## Example
@@ -19,12 +19,12 @@ Given a folder structure like this:
 
 ```
 my_folder/
-├─ file1.txt
-├─ file2.py
-├─ image1.jpg
 └─ subfolder/
-   ├─ file3.html
-   └─ file4.json
+   ├─ file1.html
+   └─ file2.json
+├─ file3.txt
+├─ file4.py
+├─ imagejpg
 ```
 
 After running the script, the `output.txt` file will contain the following:
@@ -32,42 +32,44 @@ After running the script, the `output.txt` file will contain the following:
 ```
 - - - - - - - - - - - - - - - - - - - -
 
-1. file1.txt
-2. file2.py
-3. image1.jpg
-4. subfolder
+1. subfolder
+1.1. file1.html
+1.2. file2.json
+2. file3.txt
+3. file4.py
+4. image.jpg
 
 - - - - - - - - - - - - - - - - - - - -
 
-1. TXT-file "file1.txt"
-
-[Content of file1.txt]
+1. Folder "subfolder"
 
 - - - - - - - - - - - - - - - - - - - -
 
-2. PY-file "file2.py"
+1.1. HTML-file "file1.html"
 
-[Content of file2.py]
-
-- - - - - - - - - - - - - - - - - - - -
-
-3. image1.jpg
+[Content of file1.html]
 
 - - - - - - - - - - - - - - - - - - - -
 
-4. Folder "subfolder"
+1.2. JSON-file "file2.json"
+
+[Content of file2.json]
 
 - - - - - - - - - - - - - - - - - - - -
 
-4.1. HTML-file "file3.html"
+2. TXT-file "file3.txt"
 
-[Content of file3.html]
+[Content of file3.txt]
 
 - - - - - - - - - - - - - - - - - - - -
 
-4.2. JSON-file "file4.json"
+3. PY-file "file4.py"
 
-[Content of file4.json]
+[Content of file4.py]
+
+- - - - - - - - - - - - - - - - - - - -
+
+4. image.jpg
 
 - - - - - - - - - - - - - - - - - - - -
 ```
