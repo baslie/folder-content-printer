@@ -1,21 +1,23 @@
 # Folder Content Printer
 
-A Python script that iterates through the specified directory, prints the content of files, and writes the output to a specified file. The content will be separated by tags for better readability.
+Python-скрипт, который проходит по указанной директории, выводит содержимое файлов и записывает результат в указанный файл. Содержимое разделяется тегами для улучшения читаемости.
 
-## Usage
+## Использование
 
-1. Set the `my_folder_path` variable to the folder path you want to list the content of.
-2. Set the `my_output_file` variable to the path where you want to save the output file.
-3. Run the script.
+1. Установите переменную `my_folder_path` в путь к папке, содержимое которой вы хотите просмотреть.
+2. Установите переменную `my_output_file` в путь к файлу, куда вы хотите сохранить результат.
+3. Запустите скрипт.
+
+Пример настройки:
 
 ```python
-my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\my_folder"
-my_output_file = "C:\\YOUR\\PATH\\TO\\OUTPUT\\output.txt"
+my_folder_path = "C:\\ВАШ\\ПУТЬ\\К\\ПАПКЕ\\my_folder"
+my_output_file = "C:\\ВАШ\\ПУТЬ\\К\\ФАЙЛУ\\output.txt"
 ```
 
-## Example
+## Пример
 
-Given a folder structure like this:
+Если структура папки выглядит так:
 
 ```
 my_folder/
@@ -24,10 +26,10 @@ my_folder/
    └─ file2.json
 ├─ file3.txt
 ├─ file4.py
-├─ imagejpg
+├─ image.jpg
 ```
 
-After running the script, the `output.txt` file will contain the following:
+После запуска скрипта файл `output.txt` будет содержать следующий текст:
 
 ```
 - - - - - - - - - - - - - - - - - - - -
@@ -41,31 +43,31 @@ After running the script, the `output.txt` file will contain the following:
 
 - - - - - - - - - - - - - - - - - - - -
 
-1. Folder "subfolder"
+1. Папка "subfolder"
 
 - - - - - - - - - - - - - - - - - - - -
 
-1.1. HTML-file "file1.html"
+1.1. HTML-файл "file1.html"
 
-[Content of file1.html]
-
-- - - - - - - - - - - - - - - - - - - -
-
-1.2. JSON-file "file2.json"
-
-[Content of file2.json]
+[Содержимое file1.html]
 
 - - - - - - - - - - - - - - - - - - - -
 
-2. TXT-file "file3.txt"
+1.2. JSON-файл "file2.json"
 
-[Content of file3.txt]
+[Содержимое file2.json]
 
 - - - - - - - - - - - - - - - - - - - -
 
-3. PY-file "file4.py"
+2. TXT-файл "file3.txt"
 
-[Content of file4.py]
+[Содержимое file3.txt]
+
+- - - - - - - - - - - - - - - - - - - -
+
+3. PY-файл "file4.py"
+
+[Содержимое file4.py]
 
 - - - - - - - - - - - - - - - - - - - -
 
@@ -74,4 +76,4 @@ After running the script, the `output.txt` file will contain the following:
 - - - - - - - - - - - - - - - - - - - -
 ```
 
-**Note:** The content of non-text files (images, archives, etc.) will not be included in the output file.
+**Примечание:** Содержимое нетекстовых файлов (например, изображений, архивов и т.п.) не будет включено в результирующий файл.
