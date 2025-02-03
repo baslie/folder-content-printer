@@ -4,7 +4,7 @@ from pathlib import Path
 my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\my_folder"
 my_output_file = "C:\\YOUR\\PATH\\TO\\OUTPUT\\output.txt"
 
-TEXT_EXTENSIONS = {".txt", ".html", ".js", ".css", ".py", ".json", ".gitignore", ".md"}
+TEXT_EXTENSIONS = {".txt", ".html", ".js", ".css", ".py", ".json", ".gitignore", ".md", ".env", ".yml"}
 OTHER_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".zip", ".rar", ".tar", ".gz", ".7z"}
 
 def print_folder_content(path: str, output_file: str):
