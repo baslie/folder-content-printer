@@ -1,73 +1,63 @@
 import os
 from pathlib import Path
 
-my_folder_path = "C:\\YOUR\\PATH\\TO\\FOLDER\\my_folder"
-my_output_file = "C:\\YOUR\\PATH\\TO\\OUTPUT\\output.txt"
+# Наборы расширений, по которым распознаём текстовые и другие файлы
+TEXT_EXTENSIONS = {".txt", ".html", ".js", ".css", ".py", ".json", ".gitignore", ".md", ".env", ".yml"}
+OTHER_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".zip", ".rar", ".tar", ".gz", ".7z"}
 
-TEXT_EXTENSIONS = {
-    ".txt",
-    ".html",
-    ".js",
-    ".css",
-    ".py",
-    ".json",
-    ".gitignore",
-    ".md",
-    ".env",
-    ".yml"
-}
-OTHER_EXTENSIONS = {
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".gif",
-    ".bmp",
-    ".zip",
-    ".rar",
-    ".tar",
-    ".gz",
-    ".7z"
-}
+def print_folder_content(folder_path: str, output_file: str):
+    """
+    Рекурсивно обходит папку 'folder_path' и записывает результат в 'output_file'.
+    """
 
-def print_folder_content(path: str, output_file: str):
-    def list_files_and_folders(folder_path, prefix="", depth=0):
-        content = sorted(os.listdir(folder_path))
-        for idx, item in enumerate(content, 1):
-            item_path = os.path.join(folder_path, item)
-            indent = "    " * depth + ("├── " if idx < len(content) else "└── ")
+    def list_files_and_folders(current_path, prefix="", depth=0):
+        items_in_folder = sorted(os.listdir(current_path))
+        for idx, item in enumerate(items_in_folder, start=1):
+            item_path = os.path.join(current_path, item)
+            # Формируем отступы и символы ├──/└──
+            indent = "    " * depth + ("├── " if idx < len(items_in_folder) else "└── ")
+
             if os.path.isdir(item_path):
-                result.append(f"{indent}{item}")
+                result_structure.append(f"{indent}{item}")
                 file_content.append((f"{prefix}{idx}", item_path, "folder"))
+                # Рекурсия для подпапок
                 list_files_and_folders(item_path, f"{prefix}{idx}.", depth + 1)
             else:
-                result.append(f"{indent}{item}")
-                ext = Path(item).suffix  
-                if ext == "" or ext in (TEXT_EXTENSIONS | OTHER_EXTENSIONS) or item.startswith("."):
+                result_structure.append(f"{indent}{item}")
+                ext = Path(item).suffix or f".{item}"
+                # Запоминаем файлы только с нужными расширениями или скрытые (начинаются с точки)
+                if ext in (TEXT_EXTENSIONS | OTHER_EXTENSIONS) or item.startswith("."):
                     file_content.append((f"{prefix}{idx}", item_path, "file"))
 
-    result = []
+    # Здесь будет "дерево" папок/файлов и их индексы
+    result_structure = []
     file_content = []
-    root_folder_name = os.path.basename(os.path.normpath(path))
-    result.append(root_folder_name + "/")
-    list_files_and_folders(path)
 
+    # Запишем название корневой папки
+    root_folder_name = os.path.basename(os.path.normpath(folder_path))
+    result_structure.append(root_folder_name + "/")
+
+    # Собираем инфу о вложениях
+    list_files_and_folders(folder_path)
+
+    # Записываем результат в файл
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write("\n".join(result))
+        # Сначала само "дерево" папки
+        f.write("\n".join(result_structure))
         f.write("\n\n---\n\n")
 
+        # Затем детали по файлам
         for idx, item_path, item_type in file_content:
+            # Для вложенных папок пишем только их структуру, без содержимого
             if item_type == "folder":
                 continue
             else:
-                raw_ext = Path(item_path).suffix
+                ext = Path(item_path).suffix or f".{Path(item_path).name}"
                 filename = os.path.basename(item_path)
-                if raw_ext == "":
-                    ext_print = "TXT"
-                else:
-                    ext_print = raw_ext.upper()[1:]
 
-                if raw_ext == "" or raw_ext in TEXT_EXTENSIONS or item_path.endswith(".gitignore"):
-                    f.write(f"{idx}. {ext_print}-file \"{filename}\"\n\n")
+                # Если файл в списке текстовых расширений, печатаем его содержимое
+                if ext in TEXT_EXTENSIONS or item_path.endswith(".gitignore"):
+                    f.write(f"{idx}. {ext.upper()[1:]}-file \"{filename}\"\n\n")
                     f.write(f"<\"{filename}\">\n")
                     try:
                         with open(item_path, "r", encoding="utf-8") as file:
@@ -79,9 +69,27 @@ def print_folder_content(path: str, output_file: str):
                     except Exception as e:
                         f.write(f"[Error reading file: {e}]\n")
                     f.write(f"\n</\"{filename}\">\n\n")
-                elif raw_ext in OTHER_EXTENSIONS:
+
+                # Для остальных расширений выводим только имя
+                elif ext in OTHER_EXTENSIONS:
                     f.write(f"{idx}. {filename}\n\n")
-            f.write("---\n\n")
+
+
+def main():
+    # Определяем путь к текущему скрипту (папка «Code»)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Перебираем все элементы в «Code», ищем подпапки, и для каждой создаём отдельный txt-файл
+    for item in os.listdir(script_dir):
+        item_path = os.path.join(script_dir, item)
+        if os.path.isdir(item_path) and not item.startswith('.'):
+            # Заменяем пробелы на подчёркивания в названии выходного файла
+            folder_name_for_file = item.replace(" ", "_")
+            output_filename = f"{folder_name_for_file}_output.txt"
+            output_path = os.path.join(script_dir, output_filename)
+
+            # Печатаем структуру подпапки в соответствующий txt-файл
+            print_folder_content(item_path, output_path)
 
 if __name__ == "__main__":
-    print_folder_content(my_folder_path, my_output_file)
+    main()
