@@ -40,8 +40,25 @@
 5. **Множества расширений**  
    В начале скрипта определены два множества:
    ```python
-   TEXT_EXTENSIONS = {".txt", ".html", ".js", ".css", ".py", ".json", ".gitignore", ".md", ".env", ".yml"}
-   OTHER_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".zip", ".rar", ".tar", ".gz", ".7z"}
+   # Текстовые/кодовые файлы
+   TEXT_EXTENSIONS = {
+       ".txt", ".html", ".js", ".css", ".py", ".json", ".gitignore", ".md", 
+       ".env", ".yml", ".bat", ".ts", ".tsx", ".jsx", ".vue",   # JS/TS экосистема
+       ".php", ".rb", ".sh", ".ps1", ".pl",                    # скрипты
+       ".c", ".cpp", ".h", ".hpp", ".cs",                      # C, C++, C#
+       ".java", ".kt", ".kts",                                 # Java/Kotlin
+       ".go", ".rs", ".swift",                                 # Go, Rust, Swift
+       ".sql",                                                 # SQL-скрипты
+       # И т.д. — можно расширить по потребностям
+   }
+   # Другие (чаще бинарные/архивы/изображения), которые не нужно печатать
+   OTHER_EXTENSIONS = {
+       ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp",  # картинки
+       ".zip", ".rar", ".tar", ".gz", ".7z",             # архивы
+       ".pdf", ".doc", ".docx", ".xls", ".xlsx",         # офисные файлы
+       ".exe", ".dll", ".so", ".dylib",                  # исполняемые/библиотеки
+       # И т.д. — по необходимости проекта
+   }
    ```
    - Если расширение файла входит в `TEXT_EXTENSIONS`, скрипт выводит его содержимое.
    - Если расширение файла входит в `OTHER_EXTENSIONS`, скрипт выводит только название файла.
